@@ -10,30 +10,8 @@
 
 clog_config g_clog;
 
-static int checkSdlEvent(void) {
-    SDL_Event event;
-    int quit = 0;
 
-    if (SDL_PollEvent(&event)) {
 
-        switch (event.type) {
-            case SDL_QUIT:
-                quit = 1;
-                break;
-            case SDL_KEYDOWN:
-                if (event.key.keysym.sym == SDLK_ESCAPE) {
-                    quit = 1;
-                }
-                break;
-            case SDL_KEYUP:
-                break;
-            case SDL_TEXTINPUT:
-                break;
-        }
-    }
-
-    return quit;
-}
 
 typedef struct ExampleRenderer {
     SrSprites spriteRenderer;

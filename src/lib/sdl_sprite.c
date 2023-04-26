@@ -9,6 +9,7 @@
 void srSpritesInit(SrSprites* self, SDL_Renderer* renderer)
 {
     self->renderer = renderer;
+    SDL_GetRendererOutputSize(renderer, &self->width, &self->height);
 }
 
 void srSpritesCopy(SrSprites* self, const SrSprite* sprite, int x, int y, bool center)
@@ -16,7 +17,7 @@ void srSpritesCopy(SrSprites* self, const SrSprite* sprite, int x, int y, bool c
     SDL_Rect dest;
 
     dest.x = x;
-    dest.y = y;
+    dest.y = self->height - y;
     dest.w = sprite->rect.w;
     dest.h = sprite->rect.h;
 
@@ -35,7 +36,7 @@ void srSpritesCopyEx(SrSprites* self, const SrSprite* sprite, int x, int y, int 
     SDL_Rect dest;
 
     dest.x = x;
-    dest.y = y;
+    dest.y = self->height - y;
     dest.w = (int) ((float) sprite->rect.w * scale);
     dest.h = (int) ((float) sprite->rect.h * scale);
 
@@ -46,7 +47,7 @@ void srSpritesCopyEx(SrSprites* self, const SrSprite* sprite, int x, int y, int 
 
     SDL_Point center = {(dest.w / 2), (dest.h / 2)};
 
-    int result = SDL_RenderCopyEx(self->renderer, sprite->texture, &sprite->rect, &dest, rotate, &center, flip);
+    int result = SDL_RenderCopyEx(self->renderer, sprite->texture, &sprite->rect, &dest, -rotate, &center, flip);
 
     if (result != 0) {
         CLOG_ERROR("could not render")

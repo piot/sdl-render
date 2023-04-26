@@ -9,6 +9,8 @@
 
 typedef struct SrSprites {
     SDL_Renderer* renderer;
+    int width;
+    int height;
 } SrSprites;
 
 typedef struct SrSprite {
