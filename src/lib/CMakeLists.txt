@@ -19,13 +19,13 @@ endif ()
 
 set(DEPS ../../deps/)
 
-find_package(SDL2 REQUIRED COMPONENTS SDL2)
-find_package(SDL2_image REQUIRED COMPONENTS SDL2_image>=2.0.0)
 
 file(GLOB lib_src FOLLOW_SYMLINKS "*.c")
 
 add_library(sdl_render STATIC ${lib_src})
 
+find_package(SDL2 REQUIRED COMPONENTS SDL2)
+find_package(SDL2_image REQUIRED COMPONENTS SDL2_image>=2.0.0)
 target_link_libraries(sdl_render PUBLIC SDL2::SDL2 SDL2_image::SDL2_image)
 
 target_compile_options(

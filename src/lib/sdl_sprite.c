@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 #include "clog/clog.h"
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <sdl-render/sprite.h>
 
 void srSpritesInit(SrSprites* self, SDL_Renderer* renderer)
