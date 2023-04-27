@@ -5,6 +5,8 @@
 #ifndef SDL_RENDER_GAMEPAD_H
 #define SDL_RENDER_GAMEPAD_H
 
+#include <stddef.h>
+
 typedef struct SrGamepad {
     int verticalAxis;
     int horizontalAxis;
@@ -14,6 +16,6 @@ typedef struct SrGamepad {
 } SrGamepad;
 
 void srGamepadInit(SrGamepad* self);
-int srGamepadPoll(SrGamepad* pad);
+int srGamepadPoll(SrGamepad* pad, size_t maxCount);
 
 #endif

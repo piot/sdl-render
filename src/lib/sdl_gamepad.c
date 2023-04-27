@@ -6,25 +6,42 @@
 #include <SDL2/SDL.h>
 #include <clog/clog.h>
 
-static void keyChange(SrGamepad* target, SDL_Keycode sym, int invert)
+static void keyChange(SrGamepad* targets, SDL_Keycode sym, int invert)
 {
     switch (sym)
     {
         case SDLK_w:
-            target->verticalAxis += invert;
+            targets[0].verticalAxis += invert;
             break;
         case SDLK_s:
-            target->verticalAxis -= invert;
+            targets[0].verticalAxis -= invert;
             break;
         case SDLK_d:
-            target->horizontalAxis += invert;
+            targets[0].horizontalAxis += invert;
             break;
         case SDLK_a:
-            target->horizontalAxis -= invert;
+            targets[0].horizontalAxis -= invert;
             break;
         case SDLK_SPACE:
-            target->a += invert;
+            targets[0].a += invert;
             break;
+
+        case SDLK_i:
+            targets[1].verticalAxis += invert;
+            break;
+        case SDLK_k:
+            targets[1].verticalAxis -= invert;
+            break;
+        case SDLK_l:
+            targets[1].horizontalAxis += invert;
+            break;
+        case SDLK_j:
+            targets[1].horizontalAxis -= invert;
+            break;
+        case SDLK_h:
+            targets[1].a += invert;
+            break;
+
     }
 }
 
@@ -68,10 +85,10 @@ void srGamepadInit(SrGamepad* self)
     self->a = 0;
 }
 
-int srGamepadPoll(SrGamepad* pad)
+int srGamepadPoll(SrGamepad* pads, size_t count)
 {
-    int i = checkSdlEvent(pad);
+    int i = checkSdlEvent(pads);
 
-    CLOG_VERBOSE("gamepad: %d %d %d", pad->horizontalAxis, pad->verticalAxis, pad->a)
+    CLOG_VERBOSE("gamepad: %d %d %d  1: %d", pads[0].horizontalAxis, pads[0].verticalAxis, pads[0].a, pads[1].horizontalAxis)
     return i;
 }
