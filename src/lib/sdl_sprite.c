@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 #include "clog/clog.h"
+#include "sdl-render/util.h"
 #include <SDL2/SDL.h>
 #include <sdl-render/sprite.h>
 
@@ -17,7 +18,7 @@ void srSpritesCopy(SrSprites* self, const SrSprite* sprite, int x, int y, bool c
     SDL_Rect dest;
 
     dest.x = x;
-    dest.y = self->height - y;
+    dest.y = SrFlipY(y, self->height);
     dest.w = sprite->rect.w;
     dest.h = sprite->rect.h;
 
@@ -36,7 +37,7 @@ void srSpritesCopyEx(SrSprites* self, const SrSprite* sprite, int x, int y, int 
     SDL_Rect dest;
 
     dest.x = x;
-    dest.y = self->height - y;
+    dest.y = SrFlipY(y, self->height);
     dest.w = (int) ((float) sprite->rect.w * scale);
     dest.h = (int) ((float) sprite->rect.h * scale);
 
