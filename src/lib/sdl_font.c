@@ -2,6 +2,7 @@
  *  Copyright (c) Peter Bjorklund. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
+#include "sdl-render/util.h"
 #include <clog/clog.h>
 #include <sdl-render/font.h>
 
@@ -44,7 +45,10 @@ SrTextTexture srFontRender(SrFont* self, const char* text, SDL_Color color)
 
 void srTextTextureRender(SrTextTexture* self, int x, int y)
 {
-    SDL_Rect dest = {x, y, self->surface->w, self->surface->h};
+    int width;
+    int height;
+    SDL_GetRendererOutputSize(self->renderer, &width, &height);
+    SDL_Rect dest = {x, SrFlipY(y, height), self->surface->w, self->surface->h};
     SDL_RenderCopy(self->renderer, self->texture, &self->sourceRect, &dest);
 }
 
