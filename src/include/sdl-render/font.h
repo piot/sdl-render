@@ -22,8 +22,8 @@ typedef struct SrTextTexture {
 } SrTextTexture;
 
 void srFontInit(SrFont* self, SDL_Renderer* renderer, const char* ttfFile, int fontSize);
-SrTextTexture srFontRender(SrFont* self, const char* text, SDL_Color color);
-void srFontRenderAndCopy(SrFont* self, const char* text, int x, int y, SDL_Color color);
+SrTextTexture srFontRender(const SrFont* self, const char* text, SDL_Color color);
+void srFontRenderAndCopy(const SrFont* self, const char* text, int x, int y, SDL_Color color);
 void srFontDestroy(SrFont* self);
 void srTextTextureRender(SrTextTexture* self, int x, int y);
 void srTextTextureDestroy(SrTextTexture* self);

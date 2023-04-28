@@ -25,7 +25,7 @@ void srFontDestroy(SrFont* self)
     TTF_CloseFont(self->font);
 }
 
-SrTextTexture srFontRender(SrFont* self, const char* text, SDL_Color color)
+SrTextTexture srFontRender(const SrFont* self, const char* text, SDL_Color color)
 {
     SDL_Surface* surface = TTF_RenderText_Solid(self->font, text, color);
     SDL_Texture* texture = SDL_CreateTextureFromSurface(self->renderer, surface);
@@ -58,7 +58,7 @@ void srTextTextureDestroy(SrTextTexture* self)
     SDL_DestroyTexture(self->texture);
 }
 
-void srFontRenderAndCopy(SrFont* self, const char* text, int x, int y, SDL_Color color)
+void srFontRenderAndCopy(const SrFont* self, const char* text, int x, int y, SDL_Color color)
 {
     SrTextTexture textTexture = srFontRender(self, text, color);
     srTextTextureRender(&textTexture, x, y);
