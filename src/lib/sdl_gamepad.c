@@ -25,6 +25,9 @@ static void keyChange(SrGamepad* targets, SDL_Keycode sym, int invert)
         case SDLK_SPACE:
             targets[0].a += invert;
             break;
+        case SDLK_ESCAPE:
+        case SDLK_LSHIFT:
+            targets[0].b += invert;
 
         case SDLK_i:
             targets[1].verticalAxis += invert;
@@ -56,7 +59,7 @@ static int checkSdlEvent(SrGamepad* target) {
                 quit = 1;
                 break;
             case SDL_KEYDOWN:
-                if (event.key.keysym.sym == SDLK_ESCAPE) {
+                if (event.key.keysym.sym == SDLK_BACKQUOTE) {
                     quit = 1;
                 }
                 if (event.key.repeat) {
@@ -89,6 +92,6 @@ int srGamepadPoll(SrGamepad* pads, size_t count)
 {
     int i = checkSdlEvent(pads);
 
-    CLOG_VERBOSE("gamepad: %d %d %d  1: %d", pads[0].horizontalAxis, pads[0].verticalAxis, pads[0].a, pads[1].horizontalAxis)
+    //CLOG_VERBOSE("gamepad: %d %d %d  1: %d", pads[0].horizontalAxis, pads[0].verticalAxis, pads[0].a, pads[1].horizontalAxis)
     return i;
 }
