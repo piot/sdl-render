@@ -2,9 +2,10 @@
  *  Copyright (c) Peter Bjorklund. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-#include <sdl-render/gamepad.h>
 #include <SDL2/SDL.h>
 #include <clog/clog.h>
+#include <sdl-render/gamepad.h>
+#include <stdbool.h>
 
 static void keyChange(SrGamepad* targets, SDL_Keycode sym, int invert)
 {
@@ -65,6 +66,9 @@ static int checkSdlEvent(SrGamepad* target) {
                 if (event.key.repeat) {
                     break;
                 }
+                if (event.key.keysym.sym == SDLK_F2) {
+                    target->menu = 1;
+                }
                 keyChange(target, event.key.keysym.sym, 1);
                 break;
             case SDL_KEYUP:
@@ -72,6 +76,9 @@ static int checkSdlEvent(SrGamepad* target) {
                     break;
                 }
                 keyChange(target, event.key.keysym.sym, -1);
+                if (event.key.keysym.sym == SDLK_F2) {
+                    target->menu = 0;
+                }
                 break;
             case SDL_TEXTINPUT:
                 break;
@@ -86,6 +93,7 @@ void srGamepadInit(SrGamepad* self)
     self->verticalAxis = 0;
     self->horizontalAxis = 0;
     self->a = 0;
+    self->menu = 0;
 }
 
 int srGamepadPoll(SrGamepad* pads, size_t count)

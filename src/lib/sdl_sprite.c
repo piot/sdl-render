@@ -7,13 +7,21 @@
 #include <SDL2/SDL.h>
 #include <sdl-render/sprite.h>
 
+
+void srSpriteInit(SrSprite* self, SDL_Texture* texture, SDL_Rect par)
+{
+    self->texture = texture;
+    self->rect = par;
+    SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
+}
+
 void srSpritesInit(SrSprites* self, SDL_Renderer* renderer)
 {
     self->renderer = renderer;
     SDL_GetRendererOutputSize(renderer, &self->width, &self->height);
 }
 
-void srSpritesCopy(SrSprites* self, const SrSprite* sprite, int x, int y, bool center)
+void srSpritesCopy(SrSprites* self, const SrSprite* sprite, int x, int y, bool center, Uint8 alpha)
 {
     SDL_Rect dest;
 
@@ -30,7 +38,7 @@ void srSpritesCopy(SrSprites* self, const SrSprite* sprite, int x, int y, bool c
     SDL_RenderCopy(self->renderer, sprite->texture, &sprite->rect, &dest);
 }
 
-void srSpritesCopyEx(SrSprites* self, const SrSprite* sprite, int x, int y, int rotate, float scale)
+void srSpritesCopyEx(SrSprites* self, const SrSprite* sprite, int x, int y, int rotate, float scale, Uint8 alpha)
 {
     SDL_RendererFlip flip = SDL_FLIP_NONE;
 
@@ -47,6 +55,8 @@ void srSpritesCopyEx(SrSprites* self, const SrSprite* sprite, int x, int y, int 
     }
 
     SDL_Point center = {(dest.w / 2), (dest.h / 2)};
+
+    SDL_SetTextureAlphaMod(sprite->texture, alpha);
 
     int result = SDL_RenderCopyEx(self->renderer, sprite->texture, &sprite->rect, &dest, -rotate, &center, flip);
 
