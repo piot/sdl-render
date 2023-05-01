@@ -27,8 +27,9 @@ add_library(sdl_render STATIC ${lib_src})
 find_package(SDL2 REQUIRED COMPONENTS SDL2)
 find_package(SDL2_image REQUIRED COMPONENTS SDL2_image>=2.0.0)
 find_package(SDL2_ttf REQUIRED COMPONENTS SDL2_ttf>=2.20.0)
+find_package(SDL2_mixer REQUIRED COMPONENTS SDL2_mixer>=2.0.0)
 
-target_link_libraries(sdl_render PUBLIC SDL2::SDL2 SDL2_image::SDL2_image SDL2_ttf::SDL2_ttf)
+target_link_libraries(sdl_render PUBLIC SDL2::SDL2 SDL2_image::SDL2_image SDL2_ttf::SDL2_ttf SDL2_mixer::SDL2_mixer)
 
 target_compile_options(
         sdl_render

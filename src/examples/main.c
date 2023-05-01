@@ -24,7 +24,7 @@ static void render(void *_self, SrWindow *window) {
     ExampleRenderer *renderer = (ExampleRenderer *) _self;
 
     float scale = (1.0 + sinf(renderer->i / 40.0f)) * 2 + 0.5f;
-    srSpritesCopyEx(&renderer->spriteRenderer, &renderer->avatarSprite, renderer->i, 100, renderer->i * 5, scale);
+    srSpritesCopyEx(&renderer->spriteRenderer, &renderer->avatarSprite, renderer->i, 100, renderer->i * 5, scale, 0xff);
 
     srTextTextureRender(&renderer->helloWorldText, 10, 10);
 
