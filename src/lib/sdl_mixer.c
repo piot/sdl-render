@@ -46,7 +46,7 @@ int srAudioInit(SrAudio* self)
 
 int srSamplePlay(const SrSample* sample)
 {
-    CLOG_DEBUG("playing!")
+    CLOG_VERBOSE("playing sample")
     return Mix_PlayChannel(-1, sample->chunk, 0);
 }
 
