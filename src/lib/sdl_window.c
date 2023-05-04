@@ -11,7 +11,7 @@ void srWindowInit(SrWindow* self, int windowWidth, int windowHeight, const char*
     SDL_SetHint(SDL_HINT_RENDER_VSYNC, "1");
 
     // SDL_INIT_NOPARACHUTE
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_AUDIO) < 0) {
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS ) < 0) { // | SDL_INIT_AUDIO
         printf("SDL could not initialize! SDL_Error: %s", SDL_GetError());
     }
 
