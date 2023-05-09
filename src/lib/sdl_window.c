@@ -28,7 +28,7 @@ void srWindowInit(SrWindow* self, int windowWidth, int windowHeight, const char*
     self->renderer = renderer;
 }
 
-void srWindowRender(SrWindow* self, uint32_t background_color, void* userdata, SrVSyncFn callback)
+void srWindowRenderPrepare(SrWindow* self, uint32_t background_color)
 {
     Uint8 r = background_color & 0xff;
     Uint8 g = (background_color >> 8) & 0xff;
@@ -41,7 +41,10 @@ void srWindowRender(SrWindow* self, uint32_t background_color, void* userdata, S
     }
 
     SDL_RenderClear(self->renderer);
-    callback(userdata, self);
+}
+
+void srWindowRenderPresent(SrWindow* self)
+{
     SDL_RenderPresent(self->renderer);
 }
 

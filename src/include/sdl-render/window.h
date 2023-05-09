@@ -12,9 +12,9 @@ typedef struct SrWindow {
     SDL_Renderer* renderer;
 } SrWindow;
 
-typedef void (*SrVSyncFn)(void* self, SrWindow* window);
 void srWindowInit(SrWindow* self, int width, int height, const char* name);
-void srWindowRender(SrWindow* self, uint32_t color, void* userdata, SrVSyncFn callback);
+void srWindowRenderPrepare(SrWindow* self, uint32_t color);
+void srWindowRenderPresent(SrWindow* self);
 void srWindowClose(SrWindow* self);
 
 #endif
