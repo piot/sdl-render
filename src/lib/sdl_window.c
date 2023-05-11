@@ -24,6 +24,7 @@ void srWindowInit(SrWindow* self, int windowWidth, int windowHeight, const char*
     if (renderer == 0) {
         CLOG_ERROR("SDL Renderer could not be created")
     }
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
     SDL_RaiseWindow(window);
     self->renderer = renderer;
 }
