@@ -9,8 +9,7 @@
 
 static void keyChange(SrGamepad* targets, SDL_Keycode sym, int invert)
 {
-    switch (sym)
-    {
+    switch (sym) {
         case SDLK_w:
             targets[0].verticalAxis += invert;
             break;
@@ -45,11 +44,11 @@ static void keyChange(SrGamepad* targets, SDL_Keycode sym, int invert)
         case SDLK_h:
             targets[1].a += invert;
             break;
-
     }
 }
 
-static int checkSdlEvent(SrGamepad* target) {
+static int checkSdlEvent(SrGamepad* target, SrFunctionKeys* functionKeys)
+{
     SDL_Event event;
     int quit = 0;
 
@@ -66,18 +65,22 @@ static int checkSdlEvent(SrGamepad* target) {
                 if (event.key.repeat) {
                     break;
                 }
-                if (event.key.keysym.sym == SDLK_F2) {
-                    target->menu = 1;
+                if (event.key.keysym.sym >= SDLK_F1 && event.key.keysym.sym <= SDLK_F12) {
+                    int index = event.key.keysym.sym - SDLK_F1;
+                    functionKeys->functionKeys[index] = true;
+                } else {
+                    keyChange(target, event.key.keysym.sym, 1);
                 }
-                keyChange(target, event.key.keysym.sym, 1);
                 break;
             case SDL_KEYUP:
                 if (event.key.repeat) {
                     break;
                 }
-                keyChange(target, event.key.keysym.sym, -1);
-                if (event.key.keysym.sym == SDLK_F2) {
-                    target->menu = 0;
+                if (event.key.keysym.sym >= SDLK_F1 && event.key.keysym.sym <= SDLK_F12) {
+                    int index = event.key.keysym.sym - SDLK_F1;
+                    functionKeys->functionKeys[index] = false;
+                } else {
+                    keyChange(target, event.key.keysym.sym, -1);
                 }
                 break;
             case SDL_TEXTINPUT:
@@ -88,6 +91,13 @@ static int checkSdlEvent(SrGamepad* target) {
     return quit;
 }
 
+void srFunctionKeysInit(SrFunctionKeys* self)
+{
+    for (size_t i=0; i<12; ++i) {
+        self->functionKeys[i] = false;
+    }
+}
+
 void srGamepadInit(SrGamepad* self)
 {
     self->verticalAxis = 0;
@@ -96,10 +106,11 @@ void srGamepadInit(SrGamepad* self)
     self->menu = 0;
 }
 
-int srGamepadPoll(SrGamepad* pads, size_t count)
+int srGamepadPoll(SrGamepad* pads, size_t count, SrFunctionKeys* functionKeys)
 {
-    int i = checkSdlEvent(pads);
+    int i = checkSdlEvent(pads, functionKeys);
 
-    //CLOG_VERBOSE("gamepad: %d %d %d  1: %d", pads[0].horizontalAxis, pads[0].verticalAxis, pads[0].a, pads[1].horizontalAxis)
+    // CLOG_VERBOSE("gamepad: %d %d %d  1: %d", pads[0].horizontalAxis, pads[0].verticalAxis, pads[0].a,
+    // pads[1].horizontalAxis)
     return i;
 }
