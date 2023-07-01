@@ -2,8 +2,8 @@
  *  Copyright (c) Peter Bjorklund. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-#include <sdl-render/mixer.h>
 #include <clog/clog.h>
+#include <sdl-render/mixer.h>
 
 int srSampleLoad(SrSample* self, const char* filename)
 {
@@ -24,19 +24,18 @@ int srAudioInit(SrAudio* self)
 {
     int result = Mix_OpenAudio(48000, AUDIO_S16SYS, 2, 256);
     if (result < 0) {
-        CLOG_ERROR("could not to open audio %s", SDL_GetError());
-        return result;
+        CLOG_ERROR("could not to open audio %s", SDL_GetError())
+        // return result;
     }
 
     result = Mix_AllocateChannels(4);
     if (result < 0) {
-        CLOG_ERROR("could not to allocate mixing channels: %s", SDL_GetError());
-        return result;
+        CLOG_ERROR("could not to allocate mixing channels: %s", SDL_GetError())
+        // return result;
     }
 
     result = Mix_QuerySpec(&self->frequency, &self->format, &self->channels);
-    if (result < 0)
-    {
+    if (result < 0) {
         return -1;
     }
     CLOG_DEBUG("audio init: %d %d bits %d channels", self->frequency, self->format, self->channels)
@@ -57,5 +56,6 @@ int srSampleLoop(const SrSample* sample)
 
 void srAudioClose(SrAudio* self)
 {
+    (void) self;
     Mix_CloseAudio();
 }

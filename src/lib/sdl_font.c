@@ -13,7 +13,7 @@ void srFontInit(SrFont* self, SDL_Renderer* renderer, const char* ttfFile, int f
     TTF_Font* font = TTF_OpenFont(ttfFile, fontSize);
     if (font == 0) {
         CLOG_ERROR("could not load font '%s'", ttfFile)
-        return;
+        //return;
     }
 
     self->font = font;
