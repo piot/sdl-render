@@ -8,6 +8,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Install SDL2 dev
+        run: |
+          sudo apt-get update -y -qq
+          sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev
+
       - name: Install LLVM and Clang 16
         uses: KyleMayes/install-llvm-action@v1
         with:
