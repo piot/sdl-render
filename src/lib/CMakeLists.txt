@@ -44,6 +44,7 @@ file(GLOB lib_src FOLLOW_SYMLINKS "./*.c")
 
 add_library(sdl-render STATIC ${lib_src})
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "cmake/")
 
 find_package(SDL2 REQUIRED COMPONENTS SDL2)
 find_package(SDL2_image REQUIRED COMPONENTS SDL2_image>=2.0.0)
