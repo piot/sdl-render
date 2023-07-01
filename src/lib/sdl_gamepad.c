@@ -3,7 +3,6 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 #include <SDL2/SDL.h>
-#include <clog/clog.h>
 #include <sdl-render/gamepad.h>
 #include <stdbool.h>
 
@@ -28,7 +27,7 @@ static void keyChange(SrGamepad* targets, SDL_Keycode sym, int invert)
         case SDLK_ESCAPE:
         case SDLK_LSHIFT:
             targets[0].b += invert;
-
+            break;
         case SDLK_i:
             targets[1].verticalAxis += invert;
             break;
@@ -43,6 +42,8 @@ static void keyChange(SrGamepad* targets, SDL_Keycode sym, int invert)
             break;
         case SDLK_h:
             targets[1].a += invert;
+            break;
+        default:
             break;
     }
 }
@@ -93,7 +94,7 @@ static int checkSdlEvent(SrGamepad* target, SrFunctionKeys* functionKeys)
 
 void srFunctionKeysInit(SrFunctionKeys* self)
 {
-    for (size_t i=0; i<12; ++i) {
+    for (size_t i = 0; i < 12; ++i) {
         self->functionKeys[i] = false;
     }
 }
@@ -109,7 +110,7 @@ void srGamepadInit(SrGamepad* self)
 int srGamepadPoll(SrGamepad* pads, size_t count, SrFunctionKeys* functionKeys)
 {
     int i = checkSdlEvent(pads, functionKeys);
-
+    (void) count;
     // CLOG_VERBOSE("gamepad: %d %d %d  1: %d", pads[0].horizontalAxis, pads[0].verticalAxis, pads[0].a,
     // pads[1].horizontalAxis)
     return i;

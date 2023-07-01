@@ -7,7 +7,6 @@
 #include <SDL2/SDL.h>
 #include <sdl-render/sprite.h>
 
-
 void srSpriteInit(SrSprite* self, SDL_Texture* texture, SDL_Rect par)
 {
     self->texture = texture;
@@ -34,6 +33,8 @@ void srSpritesCopy(SrSprites* self, const SrSprite* sprite, int x, int y, bool c
         dest.x -= (dest.w / 2);
         dest.y -= (dest.h / 2);
     }
+
+    SDL_SetTextureAlphaMod(sprite->texture, alpha);
 
     SDL_RenderCopy(self->renderer, sprite->texture, &sprite->rect, &dest);
 }

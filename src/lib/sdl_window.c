@@ -18,7 +18,7 @@ void srWindowInit(SrWindow* self, int windowWidth, int windowHeight, const char*
     SDL_Window* window = SDL_CreateWindow(windowName, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, windowWidth,
                                           windowHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_INPUT_FOCUS);
     if (window == 0) {
-        CLOG_ERROR("SDL Window could not be created! SDL_Error: %s", SDL_GetError());
+        CLOG_ERROR("SDL Window could not be created! SDL_Error: %s", SDL_GetError())
     }
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
     if (renderer == 0) {
