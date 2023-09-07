@@ -24,9 +24,11 @@ static void keyChange(SrGamepad* targets, SDL_Keycode sym, int invert)
         case SDLK_SPACE:
             targets[0].a += invert;
             break;
-        case SDLK_ESCAPE:
-        case SDLK_LSHIFT:
+        case SDLK_e:
             targets[0].b += invert;
+            break;
+        case SDLK_ESCAPE:
+            targets[0].menu += invert;
             break;
         case SDLK_i:
             targets[1].verticalAxis += invert;
@@ -53,7 +55,7 @@ static int checkSdlEvent(SrGamepad* target, SrFunctionKeys* functionKeys)
     SDL_Event event;
     int quit = 0;
 
-    if (SDL_PollEvent(&event)) {
+    while (SDL_PollEvent(&event)) {
 
         switch (event.type) {
             case SDL_QUIT:

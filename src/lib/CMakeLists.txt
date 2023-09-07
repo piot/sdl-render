@@ -44,7 +44,7 @@ file(GLOB lib_src FOLLOW_SYMLINKS "./*.c")
 
 add_library(sdl-render STATIC ${lib_src})
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "cmake/")
+#set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "cmake/")
 
 find_package(SDL2 REQUIRED COMPONENTS SDL2)
 find_package(SDL2_image REQUIRED COMPONENTS SDL2_image>=2.0.0)
@@ -97,6 +97,10 @@ if(COMPILER_CLANG)
             -Wno-unsafe-buffer-usage # unclear why it fails on clang-16
             -Wno-unknown-warning-option # support newer clang versions, e.g. clang-16
             -Wno-disabled-macro-expansion
+            PUBLIC
+            -Wno-documentation
+            -Wno-documentation-unknown-command
+
             ${sanitizers})
 elseif(COMPILER_GCC)
 target_compile_options(
